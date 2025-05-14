@@ -9,6 +9,28 @@ def get_db_connect():
     return connection
 
 
+def get_x_schedule(status):
+    match status:
+        case "Teacher":
+            return 'Teacher'
+        # Return procedure for the thingy
+        case "Student":
+            sid = input("Enter Student ID: ")
+
+            results = get_student_schedule(sid)
+
+            for result in results:
+                period = results[1]
+                course_name = results[2]
+                room = results[3]
+                teacher_name = results[4]
+                print("Period:", period)
+                print("Course:", course_name)
+                print("Room:", room)
+                print("Teacher:", teacher_name)
+                print()
+
+
 def execute_query(connection, query):
     cursor = connection.cursor()
     cursor.execute(query)
@@ -27,17 +49,6 @@ def get_student_schedule(sid):
     return execute_query(get_db_connect(), statement)
 
 
-sid = input("Enter Student ID: ")
+status = input("Are you a teacher or a student? ")
 
-results = get_student_schedule(sid)
-
-for result in results:
-    period = results[1]
-    course_name = results[2]
-    room = results[3]
-    teacher_name = results[4]
-    print("Period:", period)
-    print("Course:", course_name)
-    print("Room:", room)
-    print("Teacher:", teacher_name)
-    print()
+get_x_schedule(status)
