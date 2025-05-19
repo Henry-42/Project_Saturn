@@ -20,10 +20,10 @@ def get_x_schedule(status):
             results = get_student_schedule(sid)
 
             for result in results:
-                period = results[1]
-                course_name = results[2]
-                room = results[3]
-                teacher_name = results[4]
+                period = result[0]
+                course_name = result[1]
+                room = result[2]
+                teacher_name = result[3]
                 print("Period:", period)
                 print("Course:", course_name)
                 print("Room:", room)
@@ -49,6 +49,6 @@ def get_student_schedule(sid):
     return execute_query(get_db_connect(), statement)
 
 
-status = input("Are you a teacher or a student? ")
+status = input("Are you a teacher or a student: ")
 
 get_x_schedule(status)
